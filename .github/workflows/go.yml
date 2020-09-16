@@ -11,6 +11,12 @@ jobs:
   build:
     name: ${{ matrix.os }} - Go ${{ matrix.go_version }}
     runs-on: ${{ matrix.os }}
+    services:
+      nacos:
+        image: nacos/nacos-server
+        ports: 
+          - 8848:8848
+
     strategy:
       # If you want to matrix build , you can append the following list.
       matrix:
