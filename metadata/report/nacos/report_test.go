@@ -21,18 +21,13 @@ import (
 	"encoding/json"
 	"strconv"
 	"testing"
-)
 
-import (
-	"github.com/stretchr/testify/assert"
-)
-
-import (
 	"github.com/apache/dubbo-go/common"
 	"github.com/apache/dubbo-go/common/constant"
 	"github.com/apache/dubbo-go/common/extension"
 	"github.com/apache/dubbo-go/metadata/identifier"
 	"github.com/apache/dubbo-go/metadata/report"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestNacosMetadataReport_CRUD(t *testing.T) {
@@ -50,7 +45,7 @@ func TestNacosMetadataReport_CRUD(t *testing.T) {
 	assert.Nil(t, err)
 
 	serviceMi := newServiceMetadataIdentifier()
-	serviceUrl, _ := common.NewURL("registry://console.nacos.io:80", common.WithParamsValue(constant.ROLE_KEY, strconv.Itoa(common.PROVIDER)))
+	serviceUrl, _ := common.NewURL("registry://127.0.0.1:8848", common.WithParamsValue(constant.ROLE_KEY, strconv.Itoa(common.PROVIDER)))
 	err = rpt.SaveServiceMetadata(serviceMi, serviceUrl)
 	assert.Nil(t, err)
 
@@ -110,7 +105,7 @@ func TestNacosMetadataReportFactory_CreateMetadataReport(t *testing.T) {
 }
 
 func newTestReport() report.MetadataReport {
-	regurl, _ := common.NewURL("registry://console.nacos.io:80", common.WithParamsValue(constant.ROLE_KEY, strconv.Itoa(common.PROVIDER)))
+	regurl, _ := common.NewURL("registry://127.0.0.1:8848", common.WithParamsValue(constant.ROLE_KEY, strconv.Itoa(common.PROVIDER)))
 	res := extension.GetMetadataReportFactory("nacos").CreateMetadataReport(&regurl)
 	return res
 }
